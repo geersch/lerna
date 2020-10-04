@@ -15,4 +15,8 @@ describe('calculator', () => {
   test('should multiply all the numbers', () => {
     expect(calculator.multiply(1, 2, 3, 4, 5)).toEqual(120);
   })
+
+  test('should subtract all the numbers', () => {
+    expect(calculator.subtract(100, 50, 25, 10, 5)).toEqual(10);
+  })
 });

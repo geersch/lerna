@@ -16,4 +16,13 @@ export class Calculator {
 
     return total;
   }
+
+  public subtract(a: number, b: number, ...args: number[]): number {
+    let total = a - b;
+    args.forEach((argument: number) => {
+      total -= argument;
+    });
+
+    return total;
+  }
 }
