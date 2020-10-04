@@ -23,5 +23,9 @@
   ],
   "collectCoverageFrom": ["**/src/**/*.(t|j)s"],
   "coverageDirectory": "../coverage",
-  "coverageReporters": ["json", "html", "text", "text-summary", "cobertura"]
+  "coverageReporters": ["json", "html", "text", "text-summary", "cobertura"],
+  "coveragePathIgnorePatterns": [
+    "/node_modules/",
+    "index.ts"
+  ]
 }

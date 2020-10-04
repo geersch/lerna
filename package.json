@@ -10,7 +10,7 @@
     "format:check": "prettier --check \"packages/**/*.ts\"",
     "lint": "eslint 'packages/**/**.ts' --fix",
     "postinstall": "lerna bootstrap",
-    "publish:ci": "yarn run test && lerna publish patch --conventional-commits --yes",
+    "publish:ci": "yarn run test && lerna run build && lerna publish patch --conventional-commits --yes",
     "test": "jest -c jest-unit.json",
     "test:cov": "jest -c jest-unit.json --coverage"
   },
@@ -27,12 +27,13 @@
     "@typescript-eslint/parser": "^4.3.0",
     "eslint": "^7.10.0",
     "eslint-config-prettier": "^6.12.0",
+    "eslint-plugin-filenames": "^1.3.2",
     "husky": "^4.3.0",
     "jest": "^26.4.2",
     "jest-junit": "^11.1.0",
     "lerna": "^3.22.1",
     "prettier": "^2.1.2",
     "ts-jest": "^26.4.1",
-    "typescript": "^4.0.3"
+    "typescript": "3.9.7"
   }
 }

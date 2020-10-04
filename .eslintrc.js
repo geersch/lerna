@@ -18,7 +18,8 @@ module.exports = {
   },
   ignorePatterns: ['packages/*/dist'],
   rules: {
-    'no-shadow': 'error',
+    'no-shadow': 'off',
+    '@typescript-eslint/no-shadow': ['error'],
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
