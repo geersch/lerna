@@ -6,6 +6,13 @@
   "types": "dist/index",
   "author": "Christophe Geers",
   "license": "UNLICENSED",
+  "repository": {
+    "type": "git",
+    "url": "ssh://git@github.com:geersch/packages.git"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "files": [
     "dist"
   ],
@@ -14,6 +21,7 @@
     "clean": "rm -rf ./dist",
     "compile": "tsc -p tsconfig.build.json",
     "lint": "echo \"Error: run tests from root\" && exit 1",
+    "prepublishOnly": "yarn run build",
     "test": "echo \"Error: lint code from root\" && exit 1"
   }
 }

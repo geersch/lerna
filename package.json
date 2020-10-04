@@ -10,6 +10,7 @@
     "format:check": "prettier --check \"packages/**/*.ts\"",
     "lint": "eslint 'packages/**/**.ts' --fix",
     "postinstall": "lerna bootstrap",
+    "publish:ci": "yarn run test && lerna publish",
     "test": "jest -c jest-unit.json",
     "test:cov": "jest -c jest-unit.json --coverage"
   },
