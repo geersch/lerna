@@ -25,9 +25,9 @@
     "test": "echo \"Error: lint code from root\" && exit 1"
   },
   "devDependencies": {
-    "@geersch/logging": "^0.9.0"
+    "@geersch/logging": "^0.9.0 || ^1.0.0"
   },
   "peerDependencies": {
-    "@geersch/logging": "^0.9.0"
+    "@geersch/logging": "^0.9.0 || ^1.0.0"
   }
 }
