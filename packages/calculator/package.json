@@ -1,0 +1,19 @@
+{
+  "name": "@geersch/calculator",
+  "version": "1.0.0",
+  "description": "A simple calculator class used for demo purposes.",
+  "main": "dist/index",
+  "types": "dist/index",
+  "author": "Christophe Geers",
+  "license": "UNLICENSED",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "yarn run clean && yarn run compile",
+    "clean": "rm -rf ./dist",
+    "compile": "tsc -p tsconfig.build.json",
+    "lint": "echo \"Error: run tests from root\" && exit 1",
+    "test": "echo \"Error: lint code from root\" && exit 1"
+  }
+}
