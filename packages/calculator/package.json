@@ -1,6 +1,6 @@
 {
   "name": "@geersch/calculator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple calculator class used for demo purposes.",
   "main": "dist/index",
   "types": "dist/index",
