@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [1.0.3](https://github.com/geersch/packages/compare/@geersch/calculator@1.0.2...@geersch/calculator@1.0.3) (2020-10-04)
+
+
+### Bug Fixes
+
+* update dependencies of @geersch/calculator ([eac50ec](https://github.com/geersch/packages/commit/eac50ec131e10dfb9899b99a412bfefcb411246f))
+
+
+### Features
+
+* add @geersch/logging package ([f8b0c76](https://github.com/geersch/packages/commit/f8b0c76d311b7d14567b0458f1c37e0a3bf746ab))
+
+
+
+
+
 ## [1.0.2](https://github.com/geersch/packages/compare/@geersch/calculator@1.0.1...@geersch/calculator@1.0.2) (2020-10-04)
 
 

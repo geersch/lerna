@@ -1,6 +1,6 @@
 {
   "name": "@geersch/logging",
-  "version": "0.9.0",
+  "version": "0.9.1",
   "description": "A simple logging package used for demo purposes.",
   "main": "dist/index",
   "types": "dist/index",
