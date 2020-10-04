@@ -14,9 +14,13 @@ describe('calculator', () => {
 
   test('should multiply all the numbers', () => {
     expect(calculator.multiply(1, 2, 3, 4, 5)).toEqual(120);
-  })
+  });
 
   test('should subtract all the numbers', () => {
     expect(calculator.subtract(100, 50, 25, 10, 5)).toEqual(10);
-  })
+  });
+
+  test('should divide all the numbers', () => {
+    expect(calculator.divide(1000, 10, 2, 5, 10)).toEqual(1);
+  });
 });
