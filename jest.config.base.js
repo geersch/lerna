@@ -1,15 +1,12 @@
 module.exports = {
-  moduleFileExtensions: ['js', 'json', 'ts'],
-  modulePathIgnorePatterns: ['dist'],
-  rootDir: './packages',
-  testEnvironment: 'node',
-  testRegex: '\\.(spec)\\.(ts)$',
+  rootDir: '.',
+  roots: [
+    "<rootDir>/src",
+  ],
   preset: 'ts-jest',
-  globals: {
-    'ts-jest': {
-      tsconfig: './tsconfig.build.json'
-    }
-  },
+  testRegex: '\\.(spec)\\.(ts)$',
+  moduleFileExtensions: ['js', 'json', 'ts'],
+  verbose: true,
   reporters: [
     'default',
     [
@@ -22,10 +19,9 @@ module.exports = {
     ]
   ],
   collectCoverageFrom: ['**/src/**/*.(t|j)s'],
-  coverageDirectory: '../coverage',
   coverageReporters: ['json', 'html', 'text', 'text-summary', 'cobertura'],
   coveragePathIgnorePatterns: [
     '/node_modules/',
     'index.ts'
   ]
-}
+};

@@ -4,15 +4,15 @@
   "description": "A set of libraries used in demo projects.",
   "private": true,
   "scripts": {
-    "build": "lerna run build",
+    "build": "lerna run build --stream",
     "clean": "lerna run clean",
-    "format": "lerna run format",
-    "format:check": "lerna run format:check",
-    "lint": "lerna run lint",
+    "format": "lerna run format --stream",
+    "format:check": "lerna run format:check --stream",
+    "lint": "lerna run lint --stream",
     "publish:manual": "yarn run test && lerna run build && lerna publish",
     "publish:ci": "yarn run test && lerna run build && lerna publish patch --conventional-commits --yes",
-    "test": "jest -c jest-unit.js",
-    "test:cov": "jest -c jest-unit.js --coverage"
+    "test": "lerna run test --stream",
+    "test:cov": "lerna test:cov --stream"
   },
   "husky": {
     "hooks": {

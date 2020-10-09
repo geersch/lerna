@@ -24,7 +24,8 @@
     "format:check": "prettier --check \"**/*.ts\"",
     "lint": "eslint '**/**.ts' --fix",
     "prepublishOnly": "yarn run build",
-    "test": "echo \"Error: lint code from root\" && exit 1"
+    "test": "jest",
+    "test:cov": "jest --coverage"
   },
   "devDependencies": {
     "@geersch/logging": "^1.0.0"

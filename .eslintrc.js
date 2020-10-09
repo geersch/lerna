@@ -16,7 +16,6 @@ module.exports = {
     node: true,
     jest: true,
   },
-  ignorePatterns: ['packages/*/dist'],
   rules: {
     'no-shadow': 'off',
     '@typescript-eslint/no-shadow': ['error'],
