@@ -6,5 +6,7 @@
     "paths": {
       "@geersch/*": ["packages/*/src"]
     },
-  }
+  },
+
+  "exclude": ["node_modules", "dist"]
 }
