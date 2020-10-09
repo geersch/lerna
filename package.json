@@ -9,7 +9,6 @@
     "format": "prettier --write \"packages/**/*.ts\"",
     "format:check": "prettier --check \"packages/**/*.ts\"",
     "lint": "eslint 'packages/**/**.ts' --fix",
-    "postinstall": "lerna bootstrap",
     "publish:manual": "yarn run test && lerna run build && lerna publish",
     "publish:ci": "yarn run test && lerna run build && lerna publish patch --conventional-commits --yes",
     "test": "jest -c jest-unit.json",
