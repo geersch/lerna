@@ -13,7 +13,7 @@
     "publish:ci": "yarn run test && lerna run build && lerna publish patch --conventional-commits --yes",
     "test": "lerna run test --stream",
     "test:cov": "lerna run test:cov --stream",
-    "purge": "lerna exec -- rm -rf ./coverage ./dist junit.xml"
+    "purge": "lerna exec -- rm -rf ./coverage ./dist ./node_modules junit.xml"
   },
   "husky": {
     "hooks": {
