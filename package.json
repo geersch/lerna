@@ -9,10 +9,11 @@
     "format": "lerna run format --stream",
     "format:check": "lerna run format:check --stream",
     "lint": "lerna run lint --stream",
-    "publish:manual": "yarn run test && lerna run build && lerna publish",
-    "publish:ci": "yarn run test && lerna run build && lerna publish patch --conventional-commits --yes",
+    "publish:manual": "npm run test && lerna run build && lerna publish",
+    "publish:ci": "npm run test && lerna run build && lerna publish patch --conventional-commits --yes",
     "test": "lerna run test --stream",
     "test:cov": "lerna run test:cov --stream",
+    "postinstall": "lerna bootstrap",
     "purge": "lerna exec --parallel -- rm -rf ./node_modules ./coverage ./dist junit.xml"
   },
   "husky": {
@@ -20,7 +21,6 @@
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
-  "workspaces": ["packages/*"],
   "devDependencies": {
     "@commitlint/cli": "^11.0.0",
     "@commitlint/config-conventional": "^11.0.0",

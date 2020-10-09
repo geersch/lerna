@@ -17,13 +17,13 @@
     "dist"
   ],
   "scripts": {
-    "build": "yarn run clean && yarn run compile",
+    "build": "npm run clean && npm run compile",
     "clean": "rm -rf ./node_modules ./coverage ./dist junit.xml",
     "compile": "tsc -p tsconfig.build.json",
     "format": "prettier --write \"**/*.ts\"",
     "format:check": "prettier --check \"**/*.ts\"",
     "lint": "eslint '**/**.ts' --fix",
-    "prepublishOnly": "yarn run build",
+    "prepublishOnly": "npm run build",
     "test": "jest",
     "test:cov": "jest --coverage"
   },
