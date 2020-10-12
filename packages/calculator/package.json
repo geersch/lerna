@@ -8,7 +8,7 @@
   "license": "UNLICENSED",
   "repository": {
     "type": "git",
-    "url": "ssh://git@github.com:geersch/packages.git"
+    "url": "ssh://git@github.com:geersch/lerna.git"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com"
