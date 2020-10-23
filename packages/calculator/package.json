@@ -28,7 +28,10 @@
     "test:cov": "jest --coverage"
   },
   "devDependencies": {
-    "@geersch/logging": "^1.0.0"
+    "@geersch/logging": "^1.0.0",
+    "eslint": "^7.10.0",
+    "prettier": "^2.1.2",
+    "jest": "^26.4.2"
   },
   "peerDependencies": {
     "@geersch/logging": "^1.0.0"
