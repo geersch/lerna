@@ -18,7 +18,7 @@
   ],
   "scripts": {
     "build": "npm run clean && npm run compile",
-    "clean": "rm -rf ./node_modules ./coverage ./dist junit.xml",
+    "clean": "rm -rf ./coverage ./dist junit.xml",
     "compile": "tsc -p tsconfig.build.json",
     "format": "prettier --write \"**/*.ts\"",
     "format:check": "prettier --check \"**/*.ts\"",
