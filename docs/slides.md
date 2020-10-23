@@ -81,6 +81,19 @@ footer {
         │   ...
 ```
 
+<!--
+A monorepo is a repository that contains multiple projects, also called workspaces or packages.
+It is easier to manage than multiple repositories which each contain one project (multirepo).
+Of course, this depends on the type of projects you are working on. Monorepos aren't a silver bullet
+suited for every situation.
+
+- Each package is a project on its own. 
+- Every package contains its own package.json file. Each package can be versioned, built, and published independently.
+- Packages can have dependency relations between ach other (e.g. package-1 <- package-3).
+- These inter-package dependencies are managed by symlinks.
+- Lerna manages the symlinks. No need to create them manually or use npm link directly.
+-->
+
 ---
 
 ## Lerna Commands
@@ -115,6 +128,15 @@ $ lerna init
   $ lerna init --independent
   ```
 
+<!--
+Demo: demonstrate lerna init
+
+$ npm install -g lerna
+$ mkdir temp-dir && cd "$_"
+$ lerna init --independent
+$ code .
+-->
+
 ---
 
 ### Lerna bootstrap
@@ -138,6 +160,26 @@ $ lerna bootstrap
   ```shell
   $ lerna bootstrap [glob]
   ```
+<!--
+Demo: demonstrate lerna bootstrap
+
+$ cd packages
+$ mkdir packages/package-1 && cd "$_" && npm init --yes && cd ../../
+$ mkdir packages/package-2 && cd "$_" && npm init --yes && cd ../../
+$ code .
+
+Add a dependency to package-2 from package-1.
+
+"dependencies": {
+  "package-2": "^1.0.0"
+}
+
+$ lerna bootstrap
+
+Show symlink to package-2 in the node_modules of package-1.
+
+Using the --hoist flag will install dependencies at the repo root. If packages depend on different versions of an external dependency, then the most commonly used version will be hoisted and a warning will be emitted. Use the --strict flag together with --hoist to throw errors if there are version conflicts.
+-->
 
 ---
 
@@ -167,6 +209,54 @@ $ lerna run <script> -- [..args]
   $ lerna run test --stream --parallel
   ```
 
+<!--
+Demo: introduce the @geersch/lerna repository (master branch) and briefly show how it is configured.
+
+$ git clone git@github.com:geersch/lerna.git
+$ cd lerna
+$ code .
+
+Show the following files:
+
+- lerna.json
+- package.json of the logging package (chalk dependency)
+- package.json of the calculator package (@geersch/logging dependency)
+- package.json of repo root (postinstall script)
+
+$ npm install
+
+- show scripts in package.json of repo root (build, clean, format, lint...)
+- show the same scripts in the package.json of the calculator and logging packages
+
+Execute the scripts from the calculator's package folder.
+
+$ cd packages/logging
+$ npm run lint
+$ npm run format
+$ npm run test
+
+Execute the same scripts from the repo root folder.
+
+$ cd ../..
+$ npm run lint
+$ npm run format
+$ npm run test
+
+Demonstrate the --scope flag. 
+
+$ npm run test -- --scope @geersch/logging
+
+Demonstrate executing a script without the --stream flag.
+
+Modify 'test' script in root package.json.
+
+{ 
+  "test": "lerna run test"
+}
+
+$ npm run test
+-->
+
 ---
 
 ### Lerna exec
@@ -194,6 +284,13 @@ $ lerna exec -- <command> [...args]
   ```shell
   $ lerna exec --parallel -- rm -rf  ./node_modules
   ```
+
+<!--
+Demo: demonstrate lerna exec
+
+$ lerna exec --scope @geersch/logging "rm -rf ./dist"
+$ npm run purge
+-->
 
 ---
 
@@ -226,6 +323,14 @@ $ lerna add lodash --scope @geersch/logging
   $ lerna add lodash --peer --scope @geersch/logging
   ``` 
 
+<!--
+Demo: demonstrate lerna add
+
+$ lerna add lodash
+$ lerna add debug --dev
+$ lerna add moment --scope @geersch/logging
+-->
+
 ---
 
 ### Lerna version
@@ -256,6 +361,22 @@ By default it commits the changes, tags the commit and pushes to the remote.
   $ lerna version --conventional-commits
   ```
 
+<!--
+Demo: demonstrate lerna version
+
+- Change the colors used in adavanded-console.logger.ts.
+- Stage and commit the changes.
+
+$ git commit -m "fix(logging): fix colors for advanced console logger"
+
+- Update the version.
+
+$ lerna version patch --no-git-tag-version --conventional-commits --yes
+
+- Show updates made to the package.json and package-lock.json files.
+- Show CHANGELOG.md of the logging package. Show how scopes of conventional commits are used to generate the changelogs.
+-->
+
 ---
 
 ### Lerna publish
@@ -279,6 +400,18 @@ Calls `lerna version` and publishes the packages updated since the last release.
   ```shell
   $ lerna publish from-package
   ```
+
+<!--
+$ lerna publish from-package
+// -> No changes packages to publish.
+
+Do not run the following commands, we will publish the packages near the end of the presentation.
+
+$ npm run build
+$ lerna publish
+$ lerna publish patch --conventional-commits --yes
+-->
+
 ---
 
 ### Lerna clean
@@ -306,6 +439,16 @@ $ lerna clean
   $ lerna run --scope @geersch/logging clean
   ```
 
+<!--
+Remove the node_modules directory from all package.
+
+$ lerna clean
+
+Often combined with a custom clean script for each package.
+
+$ npm run clean
+-->
+
 ---
 
 ### Lerna info
@@ -331,6 +474,10 @@ Utilities:
 npmPackages:
   lerna: ^3.22.1 => 3.22.1
 ```
+
+<!--
+$ lerna info
+-->
 
 ---
 
@@ -413,6 +560,34 @@ After installing the packages (`npm install`) the `postinstall` script will run 
 * Lerna can reduce duplicate packages by hoisting the dependencies up to the root (topmost Lerna-project level `node_modules` directory).
 * Use `lerna bootstrap --hoist` in the `postinstall` script to bootstrap the package after installing them via `npm install`.
 
+<!--
+Demo: demonstrate lerna boostrap --hoist --strict
+
+We already setup a repository using Lerna and bootstrapped the dependencies. Let's see what the --hoist and --strict flags do.
+
+Update postinstall script in root package.json
+
+{
+  "postinstall": "lerna bootstrap --hoist --strict",
+}
+
+Clean the local repo and install the dependencies again.
+
+$ npm run clean
+$ rm -rf node_modules
+$ npm install
+$ code.
+
+Show that the dependencies have been hoisted:
+
+- dependent packages are symlinked
+- binaries are symlinked to individual package node_modules/.bin directories so that scripts continue to work
+
+Using the --hoist flag will install dependencies at the repo root. If packages depend on different versions of an external dependency, then the most commonly used version will be hoisted and a warning will be emitted. Use the --strict flag together with --hoist to throw errors if there are version conflicts.
+
+Without --strict common dependencies are still hoisted, but packages with different versions will get a normal, local node_modules installation of the necessary dependencies.
+-->
+
 ---
 
 <!-- _class: lead invert -->
@@ -421,6 +596,13 @@ After installing the packages (`npm install`) the `postinstall` script will run 
 
 ## git clone https://github.com/geersch/lerna.git
 git checkout lerna-with-yarn
+
+<!--
+NPM and Yarn are both package managers and rely on package.json as a container for dependency mangement.
+Both use a lock file (package-lock.json or yarn.lock) to freeze dependencies and support publishing to an NPM registry.
+Yarn was created for performance reasons because it took too long to install dependencies in large projects with NPM. 
+Many of the gaps between NPM and Yarn have vanished over time.
+-->
 
 ---
 
@@ -458,6 +640,31 @@ Use Yarn as the NPM client.
 
 * Run `yarn` from the root to install the packages and bootstrap the packages.
 
+<!--
+Demo: demonstrate Lerna with Yarn
+
+Switch to the lerna-with-yarn branch and briefly go over the differences in setup.
+
+Clean the local repo.
+
+$ git checkout lerna-with-yarn
+$ npm run clean
+$ rm -rf node_modules
+$ yarn
+
+$ cd packages/logging
+$ yarn lint
+$ yarn format
+$ yarn test
+
+Execute the same scripts from the repo root folder.
+
+$ cd ../..
+$ yarn lint
+$ yarn format
+$ yarn test
+-->
+
 ---
 
 <!-- _class: lead invert -->
@@ -466,6 +673,12 @@ Use Yarn as the NPM client.
 
 ## git clone https://github.com/geersch/lerna.git
 git checkout yarn-workspaces
+
+<!--
+Lerna provides monorepo features with the help of NPM or Yarn as a dependency management tool. Lerna uses semantic links. 
+Yarn offers support for native monorepos via Yarn Workspaces. You can configure Lerna to use Yarn Workspaces.
+In that case it leaves the whole monorepo aspect solely to the natively implemented features of Yarn Workspaces.
+-->
 
 ---
 
@@ -502,6 +715,27 @@ Use Yarn Workspaces for handling the dependencies.
 
 * Run `yarn` from the root to install the packages.
 
+<!--
+Demo: demonstrate Yarn Workspaces
+
+Switch to the yarn-workspaces branch and briefly go over the differences in setup.
+
+Clean the local repo.
+
+$ npm run clean
+$ rm -rf node_modules
+$ yarn
+
+Switch branch.
+
+$ git checkout yarn-workspaces
+
+$ cd packages/logging
+$ yarn lint
+$ yarn format
+$ yarn test
+-->
+
 ---
 
 <!-- _class: lead invert -->
@@ -510,6 +744,10 @@ Use Yarn Workspaces for handling the dependencies.
 
 ## git clone https://github.com/geersch/lerna.git
 git checkout lerna-with-yarn-workspaces
+
+<!--
+Lerna with Yarn Workspaces offers the best of two worlds. Use Yarn Workspaces to provide the monorepo functionality and let Yarn handle the dependencies. Use Lerna's commands to run commands for the multiple packages.
+-->
 
 ---
 
@@ -550,6 +788,27 @@ Use Yarn Workspaces for handling the dependencies and use Lerna to run commands 
 
 * Run `yarn` from the root to install the packages.
 
+<!--
+Demo: demonstrate Lerna with Yarn Workspaces
+
+Switch to the yarn-workspaces branch and briefly go over the differences in setup.
+
+Clean the local repo.
+
+$ git checkout lerna-with-yarn-workspaces
+$ npm run clean
+$ rm -rf node_modules
+$ yarn
+$ code .
+
+Show that the dependencies have been hoisted by default.
+
+$ lerna lint
+$ lerna format
+$ lerna test
+$ lerna test --scope @geersch/logging
+-->
+
 ---
 
 <!-- _class: lead invert -->
@@ -585,6 +844,16 @@ Let's publish the packages.
   ```shell
   $ yarn publish
   ```
+
+<!--
+Demo: demonstrate publishing the package to GitHub Packages
+
+$ git checkout lerna-with-yarn-workspaces
+$ npm run clean
+$ rm -rf node_modules
+$ yarn
+$ yarn publish
+-->
 
   ---
 
