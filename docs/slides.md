@@ -39,7 +39,6 @@ footer {
 * Yarn Workspaces
 * Lerna with Yarn Workspaces
 * GitHub Packages
-* Continuous Deployment
 
 ---
 
@@ -715,6 +714,8 @@ Use Yarn Workspaces for handling the dependencies.
 
 * Run `yarn` from the root to install the packages.
 
+* Use `yarn workspaces run` to run scripts in each workspace.
+
 <!--
 Demo: demonstrate Yarn Workspaces
 
@@ -854,43 +855,6 @@ $ rm -rf node_modules
 $ yarn
 $ yarn publish
 -->
-
-  ---
-
-  <!-- _class: lead invert -->
-
-## Continuous Deployment
-
----
-
-  ## Pipeline
-
-  An Azure DevOps pipeline.
-
-```yaml
-trigger:
-- master
-pr: none
-
-pool:
-  vmImage: ubuntu-18.04
-
-steps:
-- script: git checkout $(Build.SourceBranchName)
-  displayName: 'Checkout $(Build.SourceBranchName)'
-- script: |
-    git remote set-url origin git@github.com:geersch/lerna.git
-    git config user.name "$(GIT_USERNAME)"
-    git config user.email "$(GIT_USER_EMAIL)"
-  displayName: 'Configure GIT'
-- task: npmAuthenticate@0
-  inputs:
-    workingFile: ./.npmrc
-    customEndpoint: 'GitHub Packages'
-- script: yarn
-  displayName: 'Install the dependencies'
-- script: yarn run publish:ci
-```
 
 [1]: https://github.com/angular/angular
 [2]: https://github.com/facebook/jest
