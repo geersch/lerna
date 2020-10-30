@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "A set of libraries used in demo projects.",
   "private": true,
+  "author": "Christophe Geers",
+  "license": "UNLICENSED",
   "scripts": {
     "build": "lerna run build --stream",
     "clean": "lerna clean --yes && lerna run clean",

@@ -1,3 +1,3 @@
 # @geersch/logging
 
-A simple logging package used for demo purposes.
+A simple console logger used for demo purposes.
