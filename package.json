@@ -15,9 +15,11 @@
     "publish:ci": "npm run test && lerna run build && lerna publish patch --conventional-commits --yes",
     "test": "lerna run test --stream",
     "test:cov": "lerna run test:cov --stream",
-    "postinstall": "lerna bootstrap",
     "purge": "lerna exec --parallel -- rm -rf ./node_modules ./coverage ./dist junit.xml"
   },
+  "workspaces": [
+    "packages/*"
+  ],
   "husky": {
     "hooks": {
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
