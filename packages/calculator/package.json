@@ -1,6 +1,6 @@
 {
   "name": "@geersch/calculator",
-  "version": "1.0.4",
+  "version": "1.1.0",
   "description": "A simple calculator class used for demo purposes.",
   "main": "dist/index",
   "types": "dist/index",
@@ -28,10 +28,10 @@
     "test:cov": "jest --coverage"
   },
   "devDependencies": {
-    "@geersch/logging": "^1.0.0",
+    "@geersch/logging": "^1.1.0",
     "eslint": "^7.10.0",
-    "prettier": "^2.1.2",
-    "jest": "^26.4.2"
+    "jest": "^26.4.2",
+    "prettier": "^2.1.2"
   },
   "peerDependencies": {
     "@geersch/logging": "^1.0.0"
